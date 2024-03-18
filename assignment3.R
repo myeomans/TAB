@@ -321,15 +321,13 @@ plot(rev_topicMod20,type="summary",n = 7,xlim=c(0,.3),labeltype = "frex",
 # You can add names to the vector one at a time
 topicNames[1]="Tourist"
 topicNames[2]="Breakfast"
-topicNames[6]="Seafood"
-topicNames[7]="Dessert"
-topicNames[10]="Value"
-topicNames[12]="Cafe"
-topicNames[14]="Sushi"
-topicNames[15]="Booking"
-topicNames[17]="Service"
-topicNames[19]="American"
-
+topicNames[4]="Value"
+topicNames[6]="Dessert"
+topicNames[12]="Service"
+topicNames[13]="Seafood"
+topicNames[17]="Sushi"
+topicNames[18]="Booking"
+topicNames[20]="Cafe"
 # We can also grab more words per topic
 labelTopics(rev_topicMod20)
 
@@ -389,6 +387,10 @@ topic_prop_test<-fitNewDocuments(rev_topicMod20,
                                  rev_med_dfm_test %>%
                                    convert(to="stm") %>%
                                    `$`(documents))
+
+dim(rev_med_dfm_test %>%
+      convert(to="stm",omit_empty=FALSE) %>%
+      `$`(documents))
 
 test_stm_predict<-predict(rev_model_stm,
                           newx = topic_prop_test$theta)[,1]
