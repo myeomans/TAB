@@ -388,9 +388,6 @@ topic_prop_test<-fitNewDocuments(rev_topicMod20,
                                    convert(to="stm") %>%
                                    `$`(documents))
 
-dim(rev_med_dfm_test %>%
-      convert(to="stm",omit_empty=FALSE) %>%
-      `$`(documents))
 
 test_stm_predict<-predict(rev_model_stm,
                           newx = topic_prop_test$theta)[,1]
