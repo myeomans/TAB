@@ -269,8 +269,17 @@ rm(vecSmall,wfFile)
 
 
 ################################################
-# Politeness
 ################################################
+#     an introduction to some spacy features
+################################################
+spacy_install()
+
+
+spacyr::spacy_initialize()
+
+
+# Politeness
+
 rev_med_train_polite<-politeness(rev_med_train$text,parser="spacy")
 
 politenessPlot(rev_med_train_polite,
@@ -278,17 +287,9 @@ politenessPlot(rev_med_train_polite,
                middle_out = .05)
 
 
-################################################
-#     an introduction to some spacy features
-################################################
-spacy_install()
-
-
 rev_tiny <- rev_med %>%
   slice(1:200)
 
-
-spacyr::spacy_initialize()
 
 
 rev_tiny_sp<-spacy_parse(rev_tiny$text,
