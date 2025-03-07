@@ -249,6 +249,7 @@ c("this is a bad product","this is a very bad product",
 # the categories are in a text field, so we need to extract them - with dfm!
 
 train_cats<-TAB_dfm(rev_med_train$categories)%>%
+  convert(to="data.frame") %>%
   as_tibble() %>%
   select(chines,sandwich,nightlif,mexican) 
 
@@ -268,6 +269,7 @@ table(one_cat_train$category)
 
 # do the same in the test set
 test_cats<-TAB_dfm(rev_med_test$categories)%>%
+  convert(to="data.frame") %>%
   as_tibble() %>%
   select(chines,sandwich,nightlif,mexican) 
 
@@ -346,6 +348,10 @@ table(rowSums(rev_med_dfm_train)==0)
 # You should remove it first, before estimating 
 rev_med_train<-rev_med_train[rowSums(rev_med_dfm_train)!=0,]
 rev_med_dfm_train<-rev_med_dfm_train[rowSums(rev_med_dfm_train)!=0,]
+
+# Same in the test data!
+rev_med_test<-rev_med_test[rowSums(rev_med_dfm_test)!=0,]
+rev_med_dfm_test<-rev_med_dfm_test[rowSums(rev_med_dfm_test)!=0,]
 
 # Train a 20-topic model
 rev_topicMod20<-stm(rev_med_dfm_train,K=20)
