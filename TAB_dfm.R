@@ -16,9 +16,10 @@
 #' @import textclean
 #' @export
 TAB_dfm<-function(text,
-                   ngrams=1,
-                   stop.words=TRUE,
-                   min.prop=.01){
+                  ngrams=1,
+                  stop.words=TRUE,
+                  stem=TRUE,
+                  min.prop=.01){
   # First, we check our input is correct
   if(!is.character(text)){  
     stop("Must input character vector")
@@ -30,8 +31,11 @@ TAB_dfm<-function(text,
   text_data<-text %>%
     replace_contraction() %>%
     tokens(remove_numbers=TRUE,
-           remove_punct = TRUE) %>%
-    tokens_wordstem() %>%
+           remove_punct = TRUE)
+  if(stem){
+    text_data<-tokens_wordstem(text_data)
+  }
+  text_data <- text_data%>%
     tokens_select(pattern = drop_list, 
                   selection = "remove") %>%
     tokens_ngrams(ngrams) %>%
