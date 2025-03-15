@@ -84,7 +84,7 @@ ecMain_merged <- ecMain %>%
               filter(asker==1 & question==1) %>%
               group_by(callID) %>%
               summarize_at(vars(wordcount),sum) %>%
-            rename(wordcount_q1="wordcount"))
+              rename(wordcount_q1="wordcount"))
 
 # compare average answer word count to earnings per share
 kendall_acc(ecMain_merged$wordcount_q1,
@@ -97,7 +97,7 @@ ecMain_merged <- ecMain %>%
               group_by(callID) %>%
               summarize_at(vars(wordcount),sum) %>%
               rename(wordcount_a1="wordcount")
-            ) %>%
+  ) %>%
   mutate(wordcount_a1=replace_na(wordcount_a1,0))
 
 # compare average answer word count to earnings per share
@@ -133,10 +133,11 @@ rev_med_test<-rev_med[-train_split,]
 
 rev_med_train_polite<-politeness(rev_med_train$text,parser="spacy")
 
-politenessPlot(rev_med_train_polite,
-               cfpb_small_test$disputed,
-               middle_out = .05)
-
+featurePlot(rev_med_train_polite,
+            rev_med_train$stars,
+            split_name = "Star Rating",
+            split_levels = c("Low","High"),
+            middle_out = .05)
 
 rev_tiny <- rev_med %>%
   slice(1:200)
