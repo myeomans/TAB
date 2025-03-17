@@ -45,7 +45,7 @@ toolong %>%
   str_count("[[:alpha:]]+")
 
 
-# str_sub() helps us chop up a strings
+# str_sub() helps us chop up a string
 toolong %>%
   str_sub(0,19)
 
