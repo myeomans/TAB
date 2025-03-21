@@ -133,6 +133,9 @@ rev_med_test<-rev_med[-train_split,]
 
 rev_med_train_polite<-politeness(rev_med_train$text,parser="spacy")
 
+saveRDS(rev_med_train_polite,file="rev_med_train_polite.RDS")
+rev_med_train_polite<-readRDS("rev_med_train_polite.RDS")
+
 featurePlot(rev_med_train_polite,
             rev_med_train$stars,
             split_name = "Star Rating",
