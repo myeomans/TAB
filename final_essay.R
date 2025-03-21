@@ -312,7 +312,7 @@ rev_ner_docs<-rev_sp_ner %>%
 # extract all the common noun phrases
 phrases<-TAB_dfm(rev_ner_docs$text,
                  min.prop = .001) %>%
-  as.data.frame() %>%
+  convert(to="data.frame") %>%
   select(contains("_"),-doc_id) %>%
   colMeans() %>%
   sort(decreasing = T) %>%
