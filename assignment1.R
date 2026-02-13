@@ -24,9 +24,9 @@ library(glmnet) # Our estimation model
 
 
 # read in data
-week1_liz<-read.csv("week1_liz.csv")
-week1_boris<-read.csv("week1_boris.csv")
-week1_rishi<-read.csv("week1_rishi.csv")
+week1_liz<-read.csv("data/week1_liz.csv")
+week1_boris<-read.csv("data/week1_boris.csv")
+week1_rishi<-read.csv("data/week1_rishi.csv")
 
 # make sure the column names are correct
 names(week1_liz)
@@ -317,7 +317,7 @@ table(week1_long$metric,week1_long$annotator)
 
 # Let's bring in our correct answers
 
-week1_answers=read.csv("week1_answers.csv")
+week1_answers=read.csv("data/week1_answers.csv")
 
 head(week1_answers)
 
@@ -608,10 +608,10 @@ ngramTokens(dox)
 ######### New data - restaurant reviews
 
 # Review data
-review_dat<-readRDS("review_dat.RDS")
+review_dat<-readRDS("data/review_dat.RDS")
 
 # Business data
-businesses<-readRDS("businessset.RDS")
+businesses<-readRDS("data/businessset.RDS")
 # First thing - check variables
 
 names(review_dat)
