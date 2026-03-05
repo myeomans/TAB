@@ -1,6 +1,6 @@
 ########################################################
 #
-# Text Analysis for Business
+#.        Text Analysis for Business
 #
 #               Assignment 2
 #
@@ -162,7 +162,7 @@ rev_med_test <- rev_med_test %>%
          model_random=sample(test_ngram_predict))
 
 acc_wdct<-kendall_acc(rev_med_test$stars,
-                      rev_med_test$text_wdct)
+                      -rev_med_test$text_wdct)
 
 acc_wdct
 
@@ -224,7 +224,7 @@ rev_med_train_dicts<-rev_med_train %>%
   convert(to="data.frame")
 
 # Accuracy score using traditional dictionary
-kendall_acc(rev_med_train_dicts$loughran_uncertainty,
+kendall_acc(-rev_med_train_dicts$loughran_uncertainty,
             rev_med_train$stars)
 
 ########################################################
@@ -443,33 +443,32 @@ plot(rev_topicMod20,type="summary",n = 7,xlim=c(0,.3),labeltype = "frex",
      topic.names = topicNames) 
 
 # You can add names to the vector one at a time
-topicNames[1]="Payment"
-topicNames[9]="Seafood"
-topicNames[13]="Food Quality"
-topicNames[14]="Ramen"
-topicNames[11]="Breakfast"
+topicNames[3]="Dessert"
+topicNames[7]="Seafood"
+topicNames[20]="Cafe"
+topicNames[2]="Pizza"
 # We can also grab more words per topic
 labelTopics(rev_topicMod20)
 
 findThoughts(model=rev_topicMod20,
              texts=rev_med_train$text,
-             topics=11,n = 5)
+             topics=7,n = 5)
 
 # We can even put them in a word cloud! If you fancy it
 
-cloud(rev_topicMod20,11)
+cloud(rev_topicMod20,7)
 
 cloud(rev_topicMod20,9)
 
 
-sTABfects<-estimateEffect(1:topicNum~stars,
+stmeffects<-estimateEffect(1:topicNum~stars,
                            rev_topicMod20,
                            meta= rev_med_train %>%
                              select(stars))
 
 
 # The default plotting function is bad... Here's another version
-bind_rows(lapply(summary(sTABfects)$tables,function(x) x[2,1:2])) %>%
+bind_rows(lapply(summary(stmeffects)$tables,function(x) x[2,1:2])) %>%
   mutate(topic=factor(topicNames,ordered=T,
                       levels=topicNames),
          se_u=Estimate+`Std. Error`,
