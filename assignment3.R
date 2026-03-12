@@ -16,7 +16,7 @@ library(glmnet)
 library(sentimentr)
 
 source("vectorFunctions.R") # a new one!
-source("MLTASS_dfm.R")
+source("TAB_dfm.R")
 source("kendall_acc.R")
 
 ############### Word Vectors
@@ -81,8 +81,8 @@ rev_med_train<-rev_med[train_split,]
 rev_med_test<-rev_med[-train_split,]
 
 
-rev_med_dfm_train<-MLTASS_dfm(rev_med_train$text)
-rev_med_dfm_test<-MLTASS_dfm(rev_med_test$text,min.prop = 0) %>%
+rev_med_dfm_train<-TAB_dfm(rev_med_train$text)
+rev_med_dfm_test<-TAB_dfm(rev_med_test$text,min.prop = 0) %>%
   dfm_match(colnames(rev_med_dfm_train))
 
 #############################################
