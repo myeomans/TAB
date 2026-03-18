@@ -33,8 +33,8 @@ rev_med<-readRDS("data/rev_med.RDS")
 
 train_split=sample(1:nrow(rev_med),1000)
 
-rev_med_train<-rev_med[train_split,]
-rev_med_test<-rev_med[-train_split,]
+rev_med_train<-rev_med[1:1000,]
+rev_med_test<-rev_med[2000:3000,]
 
 
 spacyr::spacy_initialize()
@@ -49,7 +49,7 @@ featurePlot(rev_med_train_polite,
             split_levels = c("Low","High"),
             split_name = "Stars",
             middle_out = .05) +
-  theme(panel.grid = element_blank())
+  theme(panel.grid = element_blank()) 
 
 
 p_model<-cv.glmnet(x=as.matrix(rev_med_train_polite),
@@ -58,7 +58,7 @@ p_model<-cv.glmnet(x=as.matrix(rev_med_train_polite),
 rev_med_test_polite<-politeness(rev_med_test$text,parser="spacy")
 
 test_predict<-predict(p_model,
-                      newx = rev_med_test_polite)[,1]
+                      newx = as.matrix(rev_med_test_polite))[,1]
 
 acc_dfm<-kendall_acc(rev_med_test$stars,test_predict)
 
