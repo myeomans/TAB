@@ -118,7 +118,7 @@ head(QApairs)
 ############################################################
 
 revs<-read.csv("data/week1_answers.csv")
-
+gKey="AIzaSyBHhpYFL5XiIPqbBxfP5l-c2wAZJe1NnNI"
 source("geminiAPI.R")
 gemini.R::setAPI(gKey)
 
